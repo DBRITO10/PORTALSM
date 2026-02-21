@@ -2,146 +2,96 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Móveis Simonetti</title>
+  <title>Portal Logística - Móveis Simonetti</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#fbe9e7">
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-  <link rel="apple-touch-icon" href="icon-512.png">
+  <meta name="theme-color" content="#d32f2f">
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #fff5f5;
-      color: #333;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Barra Superior */
+    .top-bar {
+      background: #fff;
+      width: 100%;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+    }
+
+    #welcomeUser { font-weight: 600; color: #333; }
+
+    .logout-btn {
+      background: #d32f2f;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* Container Principal */
+    .container {
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      text-align: center;
+      width: 100%;
+      max-width: 900px;
       padding: 20px;
-      box-sizing: border-box;
-    }
-    h1 {
-      margin: 20px 0;
-      color: #d32f2f;
-      font-size: 24px;
-      font-weight: 600;
     }
 
-    .links {
-      display: flex;
+    .logo { width: 180px; margin-bottom: 30px; }
+
+    h1 { color: #333; font-size: 22px; margin-bottom: 30px; }
+
+    /* Botões de Seleção */
+    .selection-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
       width: 100%;
-      max-width: 800px;
-      padding: 0 10px;
     }
 
-    a {
-      display: inline-block;
-      padding: 16px 28px;
-      background: #fff;
-      color: #b71c1c;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    .menu-card {
+      background: white;
+      padding: 40px 20px;
+      border-radius: 15px;
       text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      min-width: 160px;
-      text-align: center;
-      flex: 1;
-    }
-
-    a:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    }
-
-    .logo {
-      width: 200px; /* Tamanho da logo no PC */
-      height: 200px;
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-
-    .top-bar {
-      background: #f8e5e3; /* Cor de fundo da barra para PC */
-      color: #333;
-      padding: 15px 30px;
-      width: 100%;
-      max-width: 400px; /* Largura da barra no PC */
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      color: #d32f2f;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-    }
-    
-    #welcomeUser {
-      font-weight: bold;
-      color: #333;
+      transition: transform 0.2s, background 0.2s;
+      border: 2px solid transparent;
     }
 
-    .top-bar button {
-      background: #CC0000;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .top-bar button:hover {
-        background: #a00;
+    .menu-card:hover {
+      transform: translateY(-5px);
+      border-color: #d32f2f;
+      background: #fffafa;
     }
 
-    #installBanner {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: #d32f2f;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      cursor: pointer;
-      display: none;
-    }
+    .icon { font-size: 40px; margin-bottom: 15px; }
+    .label { font-size: 20px; font-weight: bold; }
 
-    /* Estilos para telas pequenas (celular) */
-    @media (max-width: 768px) {
-      body {
-        padding: 10px;
-        justify-content: flex-start;
-      }
-      .top-bar {
-        position: static;
-        margin-top: 0;
-        margin-bottom: 20px;
-        padding: 10px 20px;
-        width: calc(100% - 20px);
-        max-width: none;
-      }
-      .links {
-        flex-direction: column;
-        align-items: center;
-      }
-      a {
-        width: 80%;
-        margin-bottom: 10px;
-      }
-      .logo {
-        width: 150px; /* Tamanho da logo no celular */
-        height: 150px;
-      }
-      h1 {
-        font-size: 20px;
-      }
+    /* Responsivo */
+    @media (max-width: 600px) {
+      .selection-grid { grid-template-columns: 1fr; }
+      .logo { width: 140px; }
     }
   </style>
 </head>
@@ -149,26 +99,33 @@
 
 <div class="top-bar">
   <span id="welcomeUser">Carregando...</span>
-  <button onclick="logout()">Sair</button>
+  <button class="logout-btn" onclick="logout()">Sair</button>
 </div>
 
-<img src="icon-512.png" alt="Móveis Simonetti" class="logo">
+<div class="container">
+  <img src="icon-512.png" alt="Logo" class="logo">
+  
+  <h1>Selecione o Departamento:</h1>
 
-<h1>Escolha como deseja continuar:</h1>
+  <div class="selection-grid">
+    <a href="expedicao.html" class="menu-card">
+      <div class="icon">📦</div>
+      <div class="label">EXPEDIÇÃO</div>
+    </a>
 
-<div class="links">
-  <a href="agendamento.html">📅 AGENDAMENTO</a>
-  <a href="recebimento.html">🛠 AJUSTE</a>
-  <a href="cargas do dia.html">🚚 CARGAS DO DIA</a>
+    <a href="recebimento.html" class="menu-card">
+      <div class="icon">🚚</div>
+      <div class="label">RECEBIMENTO</div>
+    </a>
+  </div>
 </div>
-
-<div id="installBanner">📲 Instalar App</div>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
   import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+  // Sua configuração (mantenha a mesma do seu arquivo)
   const firebaseConfig = {
     apiKey: "AIzaSyBvcY4cObePVA0knUcmeSCT2JPkpATQpIw",
     authDomain: "recebimento-45b44.firebaseapp.com",
@@ -184,27 +141,13 @@
 
   const welcomeUser = document.getElementById("welcomeUser");
 
-  // Check for username in localStorage first for a faster load
-  const storedUsername = localStorage.getItem("username");
-  if (storedUsername) {
-    welcomeUser.textContent = `Bem-vindo, ${storedUsername}`;
-  } else {
-    welcomeUser.textContent = "Carregando...";
-  }
-
+  // Lógica de Autenticação
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       const userDocRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(userDocRef);
-
-      if (docSnap.exists() && docSnap.data().username) {
-        const username = docSnap.data().username;
-        // Update the display and store in localStorage
-        welcomeUser.textContent = `Bem-vindo, ${username}`;
-        localStorage.setItem("username", username);
-      } else {
-        console.error("Dados de usuário incompletos. Redirecionando.");
-        window.location.href = "login.html";
+      if (docSnap.exists()) {
+        welcomeUser.textContent = `Olá, ${docSnap.data().username}`;
       }
     } else {
       window.location.href = "login.html";
@@ -213,42 +156,9 @@
 
   window.logout = () => {
     signOut(auth).then(() => {
-      localStorage.removeItem("username");
       window.location.href = "login.html";
-    }).catch((error) => {
-      console.error("Erro ao fazer logout: ", error);
     });
   };
-</script>
-
-<script defer>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("./sw.js");
-  }
-
-  let deferredPrompt;
-  const installBanner = document.getElementById("installBanner");
-
-  window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    installBanner.style.display = "block";
-  });
-
-  installBanner.addEventListener("click", (e) => {
-    installBanner.style.display = "none";
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === "accepted") {
-          console.log("Usuário aceitou a instalação do PWA");
-        } else {
-          console.log("Usuário recusou a instalação do PWA");
-        }
-        deferredPrompt = null;
-      });
-    }
-  });
 </script>
 
 </body>
