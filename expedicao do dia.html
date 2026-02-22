@@ -37,7 +37,6 @@
         .toolbar { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 15px; align-items: center; }
         #mainSearch { padding: 10px; border: 1px solid #ccc; border-radius: 6px; width: 220px; outline: none; }
         
-        /* ESTILO DO DROPDOWN AJUSTADO */
         .dropdown { position: relative; display: inline-block; }
         .btn-share { background: #1E90FF; color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-weight: bold; }
         .dropdown-content { 
@@ -52,7 +51,7 @@
             margin-top: 5px;
             border: 1px solid #ddd;
         }
-        .dropdown-content.show { display: block; } /* Classe para abrir via clique */
+        .dropdown-content.show { display: block; }
         
         .dropdown-content button { 
             color: #333; 
@@ -180,7 +179,6 @@ $(document).ready(function() {
         complete: function(res) { inicializarPagina(res.data); }
     });
 
-    // LÓGICA DO DROPDOWN (CLIQUE E FECHAR FORA)
     $("#btnShare").on("click", function(e) {
         e.stopPropagation();
         $("#dropContent").toggleClass("show");
@@ -283,7 +281,6 @@ function updateDashboard() {
 
     if(chart) chart.destroy();
     
-    // CÁLCULO DE PERCENTUAIS PARA O GRÁFICO
     const totalStatus = Object.values(statsStatus).reduce((a, b) => a + b, 0);
 
     chart = new Chart(document.getElementById('statusChart'), {
@@ -292,7 +289,7 @@ function updateDashboard() {
             labels: Object.keys(statsStatus).map(key => {
                 const val = statsStatus[key];
                 const pct = ((val / totalStatus) * 100).toFixed(1);
-                return `${key}: ${val} (${pct}%)`; // EXIBE PERCENTUAL NA LEGENDA
+                return `${key}: ${val} (${pct}%)`;
             }),
             datasets: [{ 
                 data: Object.values(statsStatus), 
