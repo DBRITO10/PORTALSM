@@ -272,7 +272,7 @@ function updateDashboard() {
     `);
 
     colunas.forEach((_, i) => {
-        const memory = localStorage.getItem(`exp_filt_${i}`);
+        const memory = localStorage.getItem(`hist_filt_${i}`);
         const btn = $(`#fbtn-${i}`);
         if (memory && JSON.parse(memory).length > 0) {
             btn.addClass("filter-applied").text("ATIVO");
@@ -314,13 +314,13 @@ function aplicarFiltro() {
     const escolhidos = $("#listCheckboxes input:checked").map(function(){ return this.value; }).get();
     const regex = escolhidos.map(v => '^' + $.fn.dataTable.util.escapeRegex(v) + '$').join('|');
     table.column(curIdx).search(regex, true, false).draw();
-    localStorage.setItem(`exp_filt_${curIdx}`, JSON.stringify(escolhidos));
+    localStorage.setItem(`hist_filt_${curIdx}`, JSON.stringify(escolhidos));
     $("#modalFiltro").hide();
     updateDashboard();
 }
 
 function limparFiltroColuna() {
-    localStorage.removeItem(`exp_filt_${curIdx}`);
+    localStorage.removeItem(`hist_filt_${curIdx}`);
     table.column(curIdx).search('').draw();
     $("#modalFiltro").hide();
     updateDashboard();
@@ -328,7 +328,7 @@ function limparFiltroColuna() {
 
 function restaurarFiltrosPermanentes() {
     colunas.forEach((_, i) => {
-        const memory = JSON.parse(localStorage.getItem(`exp_filt_${i}`));
+        const memory = JSON.parse(localStorage.getItem(`hist_filt_${i}`));
         if(memory && memory.length > 0) {
             const regex = memory.map(v => '^' + $.fn.dataTable.util.escapeRegex(v) + '$').join('|');
             table.column(i).search(regex, true, false);
@@ -342,7 +342,7 @@ function openModal(idx, title) {
     $("#modalTitle").text(title);
     const unique = table.column(idx).data().unique().sort().toArray().map(v => $(`<span>${v}</span>`).text().trim());
     const list = $("#listCheckboxes").empty();
-    const salvos = JSON.parse(localStorage.getItem(`exp_filt_${idx}`)) || unique;
+    const salvos = JSON.parse(localStorage.getItem(`hist_filt_${idx}`)) || unique;
 
     unique.forEach(v => {
         if(!v) return;
