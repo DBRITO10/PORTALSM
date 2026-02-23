@@ -225,11 +225,13 @@ function inicializarPagina(dados) {
             <td style="display:none">${qtdVal}</td>
             <td>${r.DATA || ""}</td>
             <td>${r["EXPEDIÇÃO"] || r.EXPEDICAO || ""}</td>
-            <td>${r.CARREGAMENTO || ""}</td>
             <td>${r.PLACA || ""}</td>
             <td>${r.CENTRAL || ""}</td>
             <td>${r.DESTINO || ""}</td>
             <td>${r.BOX || ""}</td>
+            <td>${r.VEICULO || ""}</td>            
+            <td>${r.PESO || ""}</td>
+            <td>${r.CARREGAMENTO || ""}</td>            
             <td><span class="pill" style="background:${coresStatus[st] || '#ccc'}; color:#fff">${st}</span></td>
             <td><span class="pill" style="background:${coresVeic[vc] || '#eee'}; color:#fff; border:1px solid #ccc">${vc}</span></td>
         </tr>`);
