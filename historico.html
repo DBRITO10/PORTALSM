@@ -217,7 +217,7 @@ function inicializarPagina(dados) {
 
         if(!st && !r.DATA) return;
 
-        if (qtdVal && !qtdVal.includes("/") && qtdVal !== ultimoID) {
+        if (qtdVal && !qtdVal.includes("-") && qtdVal !== ultimoID) {
             classeCor = (classeCor === "grupo-par") ? "grupo-impar" : "grupo-par";
             ultimoID = qtdVal;
         }
@@ -257,7 +257,7 @@ function updateDashboard() {
         let qtdVal = $(this).find('td:eq(0)').text().trim();
         let status = $(this).find('td:eq(8)').text().trim();
         
-        if (qtdVal.includes("/")) totalComps++;
+        if (qtdVal.includes("-")) totalComps++;
         else if (qtdVal !== "" && !isNaN(qtdVal)) totalCargas++;
 
         if (status) statsStatus[status] = (statsStatus[status] || 0) + 1;
@@ -368,7 +368,7 @@ function exportarPDF() {
     filteredRows.each(function(){ 
         let v = $(this).find('td:eq(0)').text().trim();
         te++;
-        if(v.includes("/")) cp++; else if(v !== "" && !isNaN(v)) c++;
+        if(v.includes("-")) cp++; else if(v !== "" && !isNaN(v)) c++;
     });
 
     doc.setFontSize(10); 
