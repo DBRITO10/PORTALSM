@@ -255,7 +255,7 @@ function updateDashboard() {
     visibleRows.each(function() {
         totalExpedicoes++; 
         let qtdVal = $(this).find('td:eq(0)').text().trim();
-        let status = $(this).find('td:eq(8)').text().trim();
+        let status = $(this).find('td:eq(7)').text().trim();
         
         if (qtdVal.includes("-")) totalComps++;
         else if (qtdVal !== "" && !isNaN(qtdVal)) totalCargas++;
