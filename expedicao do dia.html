@@ -163,7 +163,7 @@
 
 <script>
 const csvUrl = "https://docs.google.com/spreadsheets/d/1-t9-DE1erEwcgZWVHMHq5JWBqWYAnZvh-_01__3fHno/export?format=csv&gid=0";
-const colunas = ["QTD", "DATA", "EXPEDIÇÃO", "PLACA", "CENTRAL", "DESTINO", "BOX", "STATUS", "VEICULO", "PESO", "CARREGAMENTO"];
+const colunas = ["QTD", "DATA", "EXPEDIÇÃO", "CARREGAMENTO", "PLACA", "CENTRAL", "DESTINO", "BOX", "STATUS", "VEICULO"];
 
 const coresStatus = { "EM SEPARAÇÃO": "#FF8C00", "CARREGADO": "#0055b3", "FINALIZADO": "#0b6631", "CANCELADA": "#b30000" };
 const coresVeic = { "CARRETA": "#006633", "TRUCK": "#4682B4", "PEQUENO": "#6A5ACD", "TOCO": "#8B4513", "RETIRADA": "#DC143C" };
@@ -225,13 +225,11 @@ function inicializarPagina(dados) {
             <td style="display:none">${qtdVal}</td>
             <td>${r.DATA || ""}</td>
             <td>${r["EXPEDIÇÃO"] || r.EXPEDICAO || ""}</td>
+            <td>${r.CARREGAMENTO || ""}</td>
             <td>${r.PLACA || ""}</td>
             <td>${r.CENTRAL || ""}</td>
             <td>${r.DESTINO || ""}</td>
             <td>${r.BOX || ""}</td>
-            <td>${r.VEICULO || ""}</td>            
-            <td>${r.PESO || ""}</td>
-            <td>${r.CARREGAMENTO || ""}</td>            
             <td><span class="pill" style="background:${coresStatus[st] || '#ccc'}; color:#fff">${st}</span></td>
             <td><span class="pill" style="background:${coresVeic[vc] || '#eee'}; color:#fff; border:1px solid #ccc">${vc}</span></td>
         </tr>`);
